@@ -1,4 +1,3 @@
-// ... dine imports forbliver de samme
 import React, { useState } from 'react';
 import {
   View,
@@ -8,69 +7,84 @@ import {
   ScrollView,
   SafeAreaView,
   Modal,
+  Image,
 } from 'react-native';
 import { FontAwesome, Feather } from '@expo/vector-icons';
 import { Link } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Picker } from '@react-native-picker/picker';
+import Med from '../components/font/Med';
+import Reg from '../components/font/Reg';
 
 export default function CalendarScreen() {
   const [calendarEvents, setCalendarEvents] = useState([
-    { id: 1, date: '2. april kl. 12', title: 'Møde med Karen' },
-    { id: 2, date: '2. april kl. 12', title: 'Møde med Karen' },
-    { id: 3, date: '2. april kl. 12', title: 'Møde med Karen' },
-    { id: 4, date: '2. april kl. 12', title: 'Møde med Karen' },
+    { id: 1, date: '2. april kl. 10', title: 'Eksamen', exercise: '', color: '', category: '' },
+    { id: 2, date: '10. april kl. 12', title: 'Præsentation', exercise: '', color: '', category: '' },
+    { id: 3, date: '18. april kl. 11', title: 'Møde med Ida', exercise: '', color: '', category: '' },
+    { id: 4, date: '30. april kl. 9', title: 'Møde med Ras', exercise: '', color: '', category: '' },
   ]);
 
   const [showModal, setShowModal] = useState(false);
-  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [selectedEvent, setSelectedEvent] = useState<{
+    id: number;
+    date: string;
+    title: string;
+    exercise?: string;
+    color?: string;
+    category?: string;
+  } | null>(null);
   const [selectedExercise, setSelectedExercise] = useState('');
   const [tempSelectedExercise, setTempSelectedExercise] = useState('');
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
-  const handleEdit = (id) => {
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [tempSelectedCategory, setTempSelectedCategory] = useState('');
+
+  const handleEdit = (id: number) => {
     const updatedEvents = calendarEvents.map((event) =>
       event.id === id
         ? {
-            ...event,
-            title: event.id === 1 ? 'Eksamen' : event.title,
-            exercise: 'Visualisering af ro',
-            color: '#45B1F9',
-          }
+          ...event,
+          title: event.id === 1 ? 'Eksamen' : event.title,
+          exercise: 'Visualisering af ro',
+          color: '#45B1F9',
+          category: 'Afslapning',
+        }
         : event
     );
+
     const updatedEvent = updatedEvents.find((e) => e.id === id);
+    if (!updatedEvent) return;
+
     setCalendarEvents(updatedEvents);
     setSelectedEvent(updatedEvent);
     setSelectedExercise(updatedEvent.exercise || '');
     setTempSelectedExercise(updatedEvent.exercise || '');
+    setSelectedCategory(updatedEvent.category || '');
+    setTempSelectedCategory(updatedEvent.category || '');
     setShowModal(true);
   };
 
-  const handlePickerChange = (itemValue) => {
-    if (itemValue !== tempSelectedExercise) {
-      setTempSelectedExercise(itemValue);
-      setShowConfirmModal(true);
+  const handlePickerChange = (itemValue: string) => {
+    setTempSelectedExercise(itemValue);
+    setSelectedExercise(itemValue);
+    
+    // Update the event immediately
+    if (selectedEvent) {
+      const updatedEvents = calendarEvents.map((event) =>
+        event.id === selectedEvent.id
+          ? {
+              ...event,
+              exercise: itemValue,
+            }
+          : event
+      );
+      setCalendarEvents(updatedEvents);
     }
   };
 
-  const confirmExerciseChange = () => {
-    setSelectedExercise(tempSelectedExercise);
-    setShowConfirmModal(false);
-  };
-
-  const cancelExerciseChange = () => {
-    setTempSelectedExercise(selectedExercise);
-    setShowConfirmModal(false);
-  };
-
   const handleSave = () => {
-    const updatedEvents = calendarEvents.map((event) =>
-      event.id === selectedEvent.id
-        ? { ...event, exercise: selectedExercise }
-        : event
-    );
-    setCalendarEvents(updatedEvents);
+    if (!selectedEvent) return;
     setShowModal(false);
   };
 
@@ -83,96 +97,95 @@ export default function CalendarScreen() {
       style={styles.gradient}
     >
       <SafeAreaView style={styles.safeArea}>
-        <ScrollView contentContainerStyle={styles.container}>
-          <Text style={styles.monthHeading}>April 2025</Text>
+        <ScrollView stickyHeaderIndices={[0]} contentContainerStyle={styles.container}>
+          <View style={styles.stickyHeader}>
+            <Med style={styles.monthHeading}>April 2025</Med>
+          </View>
 
           {calendarEvents.map((event) => (
-            <View key={event.id} style={styles.card}>
-              <View
-                style={[styles.dot, { backgroundColor: event.color || '#D2D2D2' }]}
-              />
-              <View style={styles.textBlock}>
-                <Text style={styles.dateText}>{event.date}</Text>
-                <Text style={[styles.titleText, { fontWeight: event.id === 1 ? '700' : '500' }]}> {event.title} </Text>
-                {event.exercise && (
-                  <Text style={{ fontSize: 14 }}>
-                    Planlagt øvelse: <Text style={{ fontWeight: '500' }}>{event.exercise}</Text>
-                  </Text>
-                )}
+            <View key={event.id} style={styles.eventCard}>
+              <View style={styles.eventRow}>
+                <View style={[styles.dot, { backgroundColor: event.color || '#D2D2D2' }]} />
+                <View style={styles.eventContent}>
+                  <View style={styles.headerRow}>
+                    <Med style={styles.eventTitle}>{event.title}</Med>
+                    <Pressable style={styles.icon} onPress={() => handleEdit(event.id)}>
+                      <Feather name="edit-2" size={20} color="#051B2F" />
+                    </Pressable>
+                  </View>
+                  <Reg style={styles.eventTime}>{event.date}</Reg>
+                  <Reg style={styles.exerciseText}>
+                    {event.exercise ? `Øvelse: ${event.exercise}` : 'Ingen øvelse valgt'}
+                  </Reg>
+                </View>
               </View>
-              <Pressable onPress={() => handleEdit(event.id)}>
-                <Feather name="edit-2" size={18} color="#444" />
-              </Pressable>
             </View>
           ))}
 
-          <Link href="/chat" asChild>
-            <Pressable style={styles.planButton}>
-              <Text style={styles.planButtonText}>Planlæg med Whirl</Text>
-              <FontAwesome name="external-link" size={16} color="white" style={{ marginLeft: 6 }} />
+          <Link href={"/chat"} asChild>
+            <Pressable style={styles.chatButton}>
+            <Med style={styles.planButtonText}>Planlæg med whirl</Med>
+              <Image
+                source={require('../assets/icons/chat-icon.png')}
+                style={{ width: 30, height: 30 }}
+                resizeMode="contain"
+              />
             </Pressable>
           </Link>
 
           <Text style={styles.footerNote}>
-            Her er nogle kommende datoer, vi har fundet i din kalender – du kan altid tilføje eller redigere events.
+            Her er nogle kommende datoer, vi har fundet i din kalender, du kan altid tilføje eller redigere events.
           </Text>
         </ScrollView>
 
-        {/* Modal til valg af øvelse */}
-        <Modal visible={showModal} transparent={true} animationType="slide">
+        {/* Modal til valg af øvelse + kategori */}
+        <Modal visible={showModal} transparent animationType="slide">
           <View style={styles.modalOverlay}>
             <View style={styles.modalContainer}>
+              <Text style={styles.titleTextPop}>Planlæg en Øvelse</Text>
+
+              <Text style={styles.modalLabel}>Dato</Text>
+              <View style={styles.longButton}>
+                <Text style={styles.longButtonText}>DD/MM/YYYY</Text>
+              </View>
+
+              <Text style={styles.modalLabel}>Aktivitet</Text>
+              <View style={styles.longButton}>
+                <Text style={styles.longButtonText}>Indtast aktivitet</Text>
+              </View>
+
               <Text style={styles.modalLabel}>Vælg en øvelse</Text>
-              <View style={styles.pickerContainer}>
+              <View style={styles.pickerWrapper}>
                 <Picker
-                  selectedValue={tempSelectedExercise}
+                  selectedValue={selectedExercise}
                   onValueChange={handlePickerChange}
-                  style={styles.picker}
+                  style={[styles.picker, { color: '#051B2F' }]}
+                  dropdownIconColor="#051B2F"
                 >
-                  <Picker.Item label="Vælg en øvelse..." value="" />
-                  <Picker.Item label="Visualisering af ro" value="Visualisering af ro" />
-                  <Picker.Item label="Åndedrætsøvelse" value="Åndedrætsøvelse" />
-                  <Picker.Item label="Kropsscanning" value="Kropsscanning" />
-                  <Picker.Item label="Progressiv muskelafspænding" value="Progressiv muskelafspænding" />
+                  <Picker.Item label="Vælg en øvelse..." value="" color="#666" />
+                  <Picker.Item label="Visualisering af ro" value="Visualisering af ro" color="#051B2F" />
+                  <Picker.Item label="Åndedrætsøvelse" value="Åndedrætsøvelse" color="#051B2F" />
+                  <Picker.Item label="Eksponeringsterapi" value="Eksponeringsterapi" color="#051B2F" />
+                  <Picker.Item label="Distraktion" value="Distraktion" color="#051B2F" />
                 </Picker>
               </View>
-              <Pressable style={styles.modalButton} onPress={handleSave}>
-                <Text style={styles.modalButtonText}>Gem</Text>
-              </Pressable>
+
+              <View style={styles.modalButtonRow}>
+                <Pressable style={[styles.modalButton, styles.saveButton]} onPress={handleSave}>
+                  <Text style={styles.modalButtonText}>Gem</Text>
+                </Pressable>
+                <Pressable style={[styles.modalButton, styles.deleteButton]} onPress={() => setShowModal(false)}>
+                  <Text style={[styles.modalButtonText, { color: '#fff' }]}>Fortryd</Text>
+                </Pressable>
+              </View>
             </View>
           </View>
         </Modal>
 
-        {/* Bekræftelses-popup */}
-        <Modal visible={showConfirmModal} transparent={true} animationType="fade">
-          <View style={styles.modalOverlay}>
-            <View style={styles.modalContainer}>
-              <Text style={styles.modalLabel}>Bekræft valg</Text>
-              <Text style={{ marginBottom: 20 }}>
-                Vil du vælge øvelsen: <Text style={{ fontWeight: 'bold' }}>{tempSelectedExercise}</Text>?
-              </Text>
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <Pressable
-                  style={[styles.modalButton, { flex: 1, marginRight: 8 }]}
-                  onPress={confirmExerciseChange}
-                >
-                  <Text style={styles.modalButtonText}>Bekræft</Text>
-                </Pressable>
-                <Pressable
-                  style={[styles.modalButton, { flex: 1, backgroundColor: '#ccc' }]}
-                  onPress={cancelExerciseChange}
-                >
-                  <Text style={[styles.modalButtonText, { color: '#000' }]}>Fortryd</Text>
-                </Pressable>
-              </View>
-            </View>
-          </View>
-        </Modal>
       </SafeAreaView>
     </LinearGradient>
   );
 }
-
 
 const styles = StyleSheet.create({
   gradient: {
@@ -185,9 +198,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingBottom: 40,
   },
+  stickyHeader: {
+    backgroundColor: '#F8F5F2',
+    paddingVertical: 2,
+    paddingHorizontal: 16,
+    zIndex: 10,
+  },
+
   monthHeading: {
-    fontSize: 22,
-    fontWeight: '700',
+    fontSize: 24,
     marginBottom: 20,
     marginTop: 20,
   },
@@ -205,10 +224,14 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   dot: {
-    width: 14,
-    height: 14,
-    borderRadius: 7,
+    width: 16,
+    height: 16,
+    borderRadius: 10,
     marginRight: 12,
+    marginTop: 12,
+  },
+  eventContent: {
+    flex: 1,
   },
   textBlock: {
     flex: 1,
@@ -221,21 +244,12 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 16,
   },
-  planButton: {
-    marginTop: 40,
-    backgroundColor: '#051B2F',
-    borderRadius: 30,
-    paddingVertical: 14,
-    paddingHorizontal: 24,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'center',
-  },
-  planButtonText: {
-    color: 'white',
-    fontWeight: '600',
-    fontSize: 15,
+  titleTextPop: {
+    fontSize: 25,
+    fontWeight: '700',
+    marginBottom: 24,
+    textAlign: 'center',
+    color: '#051B2F',
   },
   footerNote: {
     fontSize: 13,
@@ -253,32 +267,155 @@ const styles = StyleSheet.create({
   modalContainer: {
     backgroundColor: 'white',
     borderRadius: 12,
-    padding: 20,
+    paddingVertical: 24,
+    paddingHorizontal: 20,
     width: '85%',
   },
   modalLabel: {
     fontSize: 16,
-    marginBottom: 10,
-  },
-  pickerContainer: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 10,
-    marginBottom: 20,
+    fontWeight: '600',
+    color: '#051B2F',
+    marginBottom: 8,
+    marginTop: 16,
   },
   picker: {
-    height: 50,
+    height: 170,
     width: '100%',
+    marginTop: -40,
   },
   modalButton: {
     backgroundColor: '#051B2F',
     paddingVertical: 12,
-    borderRadius: 10,
+    paddingHorizontal: 24,
+    borderRadius: 40,
     alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
   },
   modalButtonText: {
     color: 'white',
     fontWeight: '600',
     fontSize: 16,
+  },
+  eventRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  categoryText: {
+    fontSize: 14,
+    fontStyle: 'italic',
+    color: '#666',
+    marginTop: 6,
+  },
+  eventCard: {
+    backgroundColor: '#fff',
+    borderRadius: 16,
+    paddingVertical: 14,
+    paddingHorizontal: 16,
+    paddingTop: 6,
+    marginBottom: 16,
+    shadowColor: '#000',
+    shadowOpacity: 0.06,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 6,
+    elevation: 3,
+    borderWidth: 1,
+    borderColor: '#F0F0F0',
+  },
+
+  eventTitle: {
+    fontSize: 16,
+  },
+
+  eventTime: {
+    fontSize: 14,
+    color: '#6B7280',
+    marginTop: -6,
+    marginBottom: 4,
+  },
+
+  exerciseText: {
+    fontSize: 14,
+    color: '#374151',
+  },
+
+  editButton: {
+    color: '#007BFF',
+    fontWeight: '600',
+    marginTop: 6,
+  },
+  longButton: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 10,
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    justifyContent: 'center',
+    marginBottom: 8,
+  },
+  longButtonText: {
+    fontSize: 16,
+    color: '#A6A7AB',
+  },
+  closeIcon: {
+    position: 'absolute',
+    top: 16,
+    right: 16,
+    zIndex: 10,
+  },
+  modalButtonRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 32,
+    gap: 12,
+  },
+  saveButton: {
+    backgroundColor: '#051B2F',
+    marginRight: 8,
+    paddingLeft: 20,
+    paddingRight: 20,
+    justifyContent: 'center',
+  },
+  deleteButton: {
+    backgroundColor: '#051B2F',
+    marginLeft: 8,
+    paddingLeft: 20,
+    paddingRight: 20,
+    justifyContent: 'center',
+  },
+  pickerWrapper: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 12,
+    overflow: 'hidden',
+    marginBottom: 20,
+  },
+  headerRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 0,
+  },
+  icon: {
+    padding: 8,
+  },
+  chatButton: {
+    marginTop: 90,
+    backgroundColor: '#051B2F',
+    borderRadius: 30,
+    paddingVertical: 14,
+    paddingHorizontal: 24,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+  },
+  planButtonText: {
+    color: 'white',
+    fontWeight: '600',
+    fontSize: 15,
+    paddingRight: 6,
   },
 });

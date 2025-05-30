@@ -5,10 +5,15 @@ import {
   Pressable,
   StyleSheet,
   SectionList,
+  Image,
 } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 import { useNavigation, Link } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
+import Med from '../components/font/Med';
+import Bold from '../components/font/Bold';
+import Reg from '../components/font/Reg';
 
 type ExerciseTitle =
   | 'Visualisering af ro'
@@ -29,10 +34,10 @@ export default function FavoritesScreen() {
   const navigation = useNavigation();
 
   const [favorites, setFavorites] = useState<Record<ExerciseTitle, boolean>>({
-    'Visualisering af ro': true,
+    'Visualisering af ro': false,
     'Vejrtrækningsøvelser': true,
     'Eksponeringsterapi': false,
-    'Distraktion': false,
+    'Distraktion': true,
     'Sig angsten imod': false,
   });
 
@@ -85,7 +90,7 @@ export default function FavoritesScreen() {
 
   const renderExercise = (title: ExerciseTitle) => (
     <View style={styles.card} key={title}>
-      <Text style={styles.cardText}>{title}</Text>
+      <Reg style={styles.cardText}>{title}</Reg>
       <Pressable onPress={() => handleFavoritePress(title)}>
         <FontAwesome
           name={favorites[title] ? 'heart' : 'heart-o'}
@@ -121,19 +126,18 @@ export default function FavoritesScreen() {
         keyExtractor={(item) => item}
         renderItem={({ item }) => renderExercise(item as ExerciseTitle)}
         renderSectionHeader={({ section }) => (
-          <Text style={styles.sectionTitle}>{section.title}</Text>
+          <Med style={styles.sectionTitle}>{section.title}</Med>
         )}
         stickySectionHeadersEnabled={true}
         contentContainerStyle={styles.content}
         ListFooterComponent={
-          <Link href="/chat" asChild>
-            <Pressable style={styles.footerButton}>
-              <Text style={styles.footerButtonText}>Udforsk med Whirl</Text>
-              <FontAwesome
-                name="external-link"
-                size={18}
-                color="white"
-                style={{ marginLeft: 6 }}
+          <Link href={"/chat"} asChild>
+            <Pressable style={styles.chatButton}>
+              <Med style={styles.planButtonText}>Planlæg med whirl</Med>
+              <Image
+                source={require('../assets/icons/chat-icon.png')}
+                style={{ width: 30, height: 30 }}
+                resizeMode="contain"
               />
             </Pressable>
           </Link>
@@ -144,7 +148,7 @@ export default function FavoritesScreen() {
         <View style={styles.popupOverlay}>
           <View style={styles.popupBox}>
             <Pressable style={styles.closeButton} onPress={closePopup}>
-              <FontAwesome name="close" size={20} color="#051B2F" />
+              <Feather name="x" size={24} color="#000" />
             </Pressable>
 
             {popupStep === 1 ? (
@@ -157,6 +161,7 @@ export default function FavoritesScreen() {
                       {actionType === 'remove' ? 'Fjern' : 'Tilføj'}
                     </Text>
                   </Pressable>
+
                   <Pressable style={styles.cancelButton} onPress={closePopup}>
                     <Text style={styles.buttonText}>Fortryd</Text>
                   </Pressable>
@@ -168,9 +173,6 @@ export default function FavoritesScreen() {
                 <Text style={styles.popupText}>
                   Du har {actionType === 'remove' ? 'fjernet' : 'tilføjet'} "{selectedExercise}" {actionType === 'remove' ? 'fra' : 'til'} dine favoritter.
                 </Text>
-                <Pressable style={styles.confirmButton} onPress={closePopup}>
-                  <Text style={styles.buttonText}>Luk</Text>
-                </Pressable>
               </>
             )}
           </View>
@@ -189,9 +191,7 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   sectionTitle: {
-    fontSize: 20,
-    fontWeight: '700',
-    backgroundColor: '#F8F5F2',
+    fontSize: 22,
     paddingVertical: 20,
     paddingHorizontal: 8,
     paddingTop: 40,
@@ -212,7 +212,6 @@ const styles = StyleSheet.create({
   },
   cardText: {
     fontSize: 16,
-    fontWeight: '500',
   },
   footerButton: {
     marginTop: 70,
@@ -251,10 +250,11 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 6,
     elevation: 5,
-    marginBottom: 80,
+    paddingBottom: 20, // eller det der føles passende
   },
   closeButton: {
     alignSelf: 'flex-end',
+    
   },
   popupTitle: {
     fontSize: 20,
@@ -278,17 +278,47 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
-  cancelButton: {
-    backgroundColor: '#122A3F',
-    paddingVertical: 12,
-    paddingHorizontal: 16,
+  LukButton: {
+    backgroundColor: '#051B2F',
+    paddingVertical: 50,
+    paddingHorizontal: 5,
     borderRadius: 24,
     marginHorizontal: 4,
     flex: 1,
     alignItems: 'center',
   },
+  cancelButton: {
+    backgroundColor: '#122A3F',
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderRadius: 24,
+    flex: 1,
+    alignItems: 'center',
+  },
+  LukbuttonText: {
+    color: 'pink',
+    fontWeight: '600',
+    alignItems: 'center',
+  },
   buttonText: {
     color: 'white',
     fontWeight: '600',
+  },
+  chatButton: {
+    marginTop: 110,
+    backgroundColor: '#051B2F',
+    borderRadius: 30,
+    paddingVertical: 14,
+    paddingHorizontal: 24,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+  },
+  planButtonText: {
+    color: 'white',
+    fontWeight: '600',
+    fontSize: 15,
+    paddingRight: 6,
   },
 });
