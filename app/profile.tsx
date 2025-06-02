@@ -101,7 +101,8 @@ const ProfileScreen = () => {
 
   return (
     <LinearGradient
-      colors={['#FAF6F2', '#DDEFFB', '#FEE2C5']}
+      colors={['#F8F5F2', '#C1E7FF', '#FFA05D']}
+      locations={[0, 0.8, 1]}
       style={styles.container}
     >
       <KeyboardAvoidingView
@@ -114,8 +115,8 @@ const ProfileScreen = () => {
               <Med style={styles.h1}>Rediger oplysninger</Med>
 
               <Bold style={styles.label}>Kaldenavn</Bold>
-              <TextInput 
-                style={styles.input} 
+              <TextInput
+                style={styles.input}
                 value={profile.username}
                 onChangeText={(text) => {
                   setProfile({ ...profile, username: text });
@@ -126,8 +127,8 @@ const ProfileScreen = () => {
               />
 
               <Bold style={styles.label}>E-mail</Bold>
-              <TextInput 
-                style={styles.input} 
+              <TextInput
+                style={styles.input}
                 value={profile.email}
                 onChangeText={(text) => {
                   setProfile({ ...profile, email: text });
@@ -149,16 +150,16 @@ const ProfileScreen = () => {
                   onChangeText={setPassword}
                 />
                 <Pressable onPress={() => setShowPassword(!showPassword)}>
-                  <Ionicons 
-                    name={showPassword ? "eye-off-outline" : "eye-outline"} 
-                    size={20} 
-                    color="#777" 
+                  <Ionicons
+                    name={showPassword ? "eye-off-outline" : "eye-outline"}
+                    size={20}
+                    color="#777"
                   />
                 </Pressable>
               </View>
 
-              <Pressable 
-                style={[styles.editButton, !isEditing && styles.buttonDisabled]} 
+              <Pressable
+                style={[styles.editButton, !isEditing && styles.buttonDisabled]}
                 onPress={handleSave}
                 disabled={!isEditing}
               >

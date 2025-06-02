@@ -68,15 +68,15 @@ export default function CalendarScreen() {
   const handlePickerChange = (itemValue: string) => {
     setTempSelectedExercise(itemValue);
     setSelectedExercise(itemValue);
-    
+
     // Update the event immediately
     if (selectedEvent) {
       const updatedEvents = calendarEvents.map((event) =>
         event.id === selectedEvent.id
           ? {
-              ...event,
-              exercise: itemValue,
-            }
+            ...event,
+            exercise: itemValue,
+          }
           : event
       );
       setCalendarEvents(updatedEvents);
@@ -90,8 +90,8 @@ export default function CalendarScreen() {
 
   return (
     <LinearGradient
-      colors={['#F8F5F2', '#F8F5F2', '#D9EAF7', '#B3D4EC', '#EAC5A1']}
-      locations={[0, 0.5, 0.75, 0.9, 1]}
+      colors={['#F8F5F2', '#C1E7FF', '#FFA05D']}
+      locations={[0, 0.8, 1]}
       start={{ x: 0.5, y: 0 }}
       end={{ x: 0.5, y: 1 }}
       style={styles.gradient}
@@ -124,7 +124,7 @@ export default function CalendarScreen() {
 
           <Link href={"/chat"} asChild>
             <Pressable style={styles.chatButton}>
-            <Med style={styles.planButtonText}>Planlæg med whirl</Med>
+              <Med style={styles.planButtonText}>Planlæg med whirl</Med>
               <Image
                 source={require('../assets/icons/chat-icon.png')}
                 style={{ width: 30, height: 30 }}

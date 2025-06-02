@@ -61,10 +61,9 @@ export default function Index() {
   };
 
   type Artikel = {
-    id: string; // eller string, hvis dine id'er er strenge
+    id: string; 
     title: string;
     text: string;
-    // evt. andre felter som billede osv.
   };
 
   const [artikler, setArtikler] = useState<Artikel[]>([
@@ -89,25 +88,6 @@ export default function Index() {
       text: 'Tekst 2',
     },
   ]);
-
-  useEffect(() => {
-    const animate = () => {
-      Animated.sequence([
-        Animated.timing(animatedValue, {
-          toValue: 1,
-          duration: 2000,
-          useNativeDriver: false,
-        }),
-        Animated.timing(animatedValue, {
-          toValue: 0,
-          duration: 2000,
-          useNativeDriver: false,
-        })
-      ]).start(() => animate());
-    };
-
-    animate();
-  }, []);
 
   useEffect(() => {
     if (Visible) {
@@ -136,8 +116,8 @@ export default function Index() {
     <View style={styles.container}>
       <Animated.View style={styles.gradient}>
         <AnimatedLinearGradient
-          colors={['#FFA05D', '#A1D8FF', '#F3F4F5']}
-          locations={[0, 0.4, 0.8]}
+          colors={['#FFA05D', '#C1E7FF', '#F8F5F2', '#F8F5F2']}
+          locations={[0, 0.4, 0.8, 0.9]}
           start={{ x: startX, y: 0 }}
           end={{ x: 0.3, y: endY }}
           style={StyleSheet.absoluteFill}
@@ -343,13 +323,13 @@ export default function Index() {
                 </View>
 
                 <Text style={styles.cardTitle}>Klimaangst</Text>
-                <Image source={require('../assets/icons/klimaangst.png')} style={styles.cardImageartikel} />
+                <Image source={require('../assets/icons/klimaangst.png')} style={styles.cardImageartikelopen} />
                 <Text style={styles.ArtikelText}>Som klimaforandringerne skrider frem, kan flere komme til at lide af det, så en gruppe forskere har prøvet at undersøge, om terapi via internettet kan hjælpe.
                 </Text>
                 <Text style={styles.ArtikelText}>I et {' '}<Text style={{ textDecorationLine: 'underline' }} onPress={() => Linking.openURL('https://videnskab.dk')}>studie udgivet i tidsskriftet Behaviour Research and Therapy</Text> har forsøgspersoner oplevet forbedringer i deres klimarelaterede stress, -depression og -ubehag sammenlignet med en kontrolgruppe, efter otte ugers onlineterapi.
                 </Text>
                 <Button
-                  title="Åben artikl"
+                  title="Åben artikel"
                   onPress={() => Linking.openURL('https://videnskab.dk/krop-sundhed/klimaangst-skraeddersyet-onlineterapi-kan-afhjaelpe-frygt-for-klodens-fremtid/')}
                   buttonStyle={styles.cardButtonArtikel}
                   titleStyle={styles.cardButtonText}
@@ -381,14 +361,14 @@ export default function Index() {
                 </View>
 
                 <Text style={styles.cardTitle}>Terapi på skærm</Text>
-                <Image source={require('../assets/icons/terapipaaskream.png')} style={styles.cardImageartikel} />
+                <Image source={require('../assets/icons/terapipaaskream.png')} style={styles.cardImageartikelopen} />
                 <Text style={styles.ArtikelText}>Inden for de seneste år har udviklingen af digitale terapiformer taget fart. Særligt COVID-19-pandemien har været med til at accelerere udviklingen af digitale løsninger, som kan stå i stedet for det fysiske fremmøde.
                 </Text>
                 <Text style={styles.ArtikelText}>Men hvad er digital terapi egentlig? Og virker det overhovedet?</Text>
                 <Text style={styles.ArtikelText}>Udviklingen af nye digitale hjælpemidler har også fundet vej ind i psykologien, og det bliver mere og mere udbredt at udbyde terapi via skærmen.
                 </Text>
                 <Button
-                  title="Åben artikl"
+                  title="Åben artikel"
                   onPress={() => Linking.openURL('https://videnskab.dk/krop-sundhed/terapi-paa-skaerm-kan-man-gaa-til-psykolog-hjemmefra')}
                   buttonStyle={styles.cardButtonArtikel}
                   titleStyle={styles.cardButtonText}
@@ -419,13 +399,13 @@ export default function Index() {
                 </View>
 
                 <Text style={styles.cardTitle}>Dæmpe stress og angst</Text>
-                <Image source={require('../assets/icons/dempstress.png')} style={styles.cardImageartikel} />
+                <Image source={require('../assets/icons/dempstress.png')} style={styles.cardImageartikelopen} />
                 <Text style={styles.ArtikelText}>"Jeg skal på landet i weekend for at koble af."</Text>
                 <Text style={styles.ArtikelText}>Det er en almindelig bemærkning blandt folk, som tager et par dage ud i naturen for at undslippe livet i de større byer. Vi ved alle, at det virker – et par dages afslapning på landet.</Text>
                 <Text style={styles.ArtikelText}>Befolkningstætheden i byområderne vokser hurtigere, end hvad godt er. I disse år {' '}<Text style={{ textDecorationLine: 'underline' }} onPress={() => Linking.openURL('https://www.un.org/development/desa/en/news/population/2018-revision-of-world-urbanization-prospects.html')}> bor mere end halvdelen af verdens befolkning i byer,</Text> og det forventes, at den andel bare vil fortsætte med at vokse.
                 </Text>
                 <Button
-                  title="Åben artikl"
+                  title="Åben artikel"
                   onPress={() => Linking.openURL('https://videnskab.dk/kultur-samfund/hvordan-en-gaatur-i-naturen-kan-taemme-vores-hjerner/')}
                   buttonStyle={styles.cardButtonArtikel}
                   titleStyle={styles.cardButtonText}
@@ -457,13 +437,13 @@ export default function Index() {
                 </View>
 
                 <Text style={styles.cardTitle}>Hvad er angst?</Text>
-                <Image source={require('../assets/icons/hvaderangst.png')} style={styles.cardImageartikel} />
+                <Image source={require('../assets/icons/hvaderangst.png')} style={styles.cardImageartikelopen} />
                 <Text style={styles.ArtikelText}>Pludseligt, som et lyn fra en klar himmel, bliver du ramt af en intens angst, nærmest rædsel, samtidig med at du får en række meget ubehagelige fysiske symptomer: Hjertet hamrer, som skulle det springe ud af brystet, du ryster over hele kroppen og sveder.
                 </Text>
                 <Text style={styles.ArtikelText}>Det føles, som om der sidder en elefant på brystkassen, og du frygter, at du er ved enten at dø af et hjerteanfald eller at miste kontrollen over dig selv fuldstændig.
                 </Text>
                 <Button
-                  title="Åben artikl"
+                  title="Åben artikel"
                   onPress={() => Linking.openURL('https://videnskab.dk/krop-sundhed/klimaangst-skraeddersyet-onlineterapi-kan-afhjaelpe-frygt-for-klodens-fremtid/')}
                   buttonStyle={styles.cardButtonArtikel}
                   titleStyle={styles.cardButtonText}
@@ -838,6 +818,13 @@ const styles = StyleSheet.create({
   cardImageartikel: {
     width: 100,
     height: 100,
+    resizeMode: 'contain',
+    alignSelf: 'center',
+    marginVertical: 10,
+  },
+  cardImageartikelopen: {
+    width: 150,
+    height: 150,
     resizeMode: 'contain',
     alignSelf: 'center',
     marginVertical: 10,

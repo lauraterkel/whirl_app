@@ -43,7 +43,7 @@ export default function MethodsScreen() {
 
   return (
     <LinearGradient
-      colors={['#F8F5F2', '#D9EBF7', '#EAC5A1']}
+      colors={['#F8F5F2', '#C1E7FF', '#FFA05D']}
       locations={[0, 0.7, 1]}
       style={styles.container}
     >

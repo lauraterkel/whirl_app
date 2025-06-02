@@ -7,7 +7,7 @@ export default function ChatWithBot() {
     <View style={styles.container}>
       <WebView
         source={{
-          uri: 'https://fluffy-chaja-fb1270.netlify.app/',
+          uri: 'https://fluffy-chaja-fb1270.netlify.app',
         }}
         style={{ flex: 1 }}
         originWhitelist={['*']}

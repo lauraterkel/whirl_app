@@ -115,8 +115,8 @@ export default function FavoritesScreen() {
 
   return (
     <LinearGradient
-      colors={['#F8F5F2', '#F8F5F2', '#D9EAF7', '#B3D4EC', '#EAC5A1']}
-      locations={[0, 0.5, 0.75, 0.9, 1]}
+      colors={['#F8F5F2', '#C1E7FF', '#FFA05D']}
+      locations={[0, 0.8, 1]}
       start={{ x: 0.5, y: 0 }}
       end={{ x: 0.5, y: 1 }}
       style={styles.gradient}
@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
   },
   closeButton: {
     alignSelf: 'flex-end',
-    
+
   },
   popupTitle: {
     fontSize: 20,
