@@ -17,44 +17,44 @@ export default function ImportantInfoScreen() {
 
     return (
         <View style={styles.container}>
-        <LinearGradient
-            colors={['#F8F5F2', '#D9EBF7', '#EAC5A1']}
-            locations={[0, 0.7, 1]}
-            style={styles.container}
-        >
-            <ScrollView contentContainerStyle={styles.scrollContainer}>
-                <Med style={styles.H1}>Vigtige oplysninger</Med>
+            <LinearGradient
+                colors={['#F8F5F2', '#D9EBF7', '#EAC5A1']}
+                locations={[0, 0.7, 1]}
+                style={styles.container}
+            >
+                <ScrollView contentContainerStyle={styles.scrollContainer}>
+                    <Med style={styles.H1}>Vigtige oplysninger</Med>
 
-                <View style={styles.card}>
-                    <Semi style={styles.cardTitle}>whirl er ikke en erstatning for professionel hjælp</Semi>
-                    <Reg style={styles.p}>
-                        whirl er et AI-baseret støtteredskab og ikke en erstatning for psykologisk behandling
-                        eller diagnosticering. Det er skabt til at støtte dig i angstfyldte øjeblikke.
-                    </Reg>
-                </View>
+                    <View style={styles.card}>
+                        <Semi style={styles.cardTitle}>whirl er ikke en erstatning for professionel hjælp</Semi>
+                        <Reg style={styles.p}>
+                            whirl er et AI-baseret støtteredskab og ikke en erstatning for psykologisk behandling
+                            eller diagnosticering. Det er skabt til at støtte dig i angstfyldte øjeblikke.
+                        </Reg>
+                    </View>
 
-                <View style={styles.card}>
-                    <Semi style={styles.cardTitle}>Søg altid professionel rådgivning ved behov</Semi>
-                    <Reg style={styles.p}>
-                        whirls svar kan indeholde fejl. Vi anbefaler, at du kontakter en professionel for
-                        rådgivning. Du finder kontaktinfo til hjælp og støtte på her i appen.
-                    </Reg>
-                </View>
+                    <View style={styles.card}>
+                        <Semi style={styles.cardTitle}>Søg altid professionel rådgivning ved behov</Semi>
+                        <Reg style={styles.p}>
+                            whirls svar kan indeholde fejl. Vi anbefaler, at du kontakter en professionel for
+                            rådgivning. Du finder kontaktinfo til hjælp og støtte på her i appen.
+                        </Reg>
+                    </View>
 
-                <View style={styles.card}>
-                    <Semi style={styles.cardTitle}>Kun for brugere over 18 år</Semi>
-                    <Reg style={styles.p}>
-                        whirl er for personer over 18 år. Ved at bruge Whirl accepterer du vores vilkår og
-                        forstår, at dine data behandles fortroligt og i overensstemmelse med GDPR.
-                    </Reg>
-                </View>
+                    <View style={styles.card}>
+                        <Semi style={styles.cardTitle}>Kun for brugere over 18 år</Semi>
+                        <Reg style={styles.p}>
+                            whirl er for personer over 18 år. Ved at bruge Whirl accepterer du vores vilkår og
+                            forstår, at dine data behandles fortroligt og i overensstemmelse med GDPR.
+                        </Reg>
+                    </View>
 
 
-                <Pressable style={styles.button} onPress={handleContinue}>
-                    <Text style={styles.buttonText}>Accepter</Text>
-                </Pressable>
-            </ScrollView>
-        </LinearGradient>
+                    <Pressable style={styles.button} onPress={handleContinue}>
+                        <Text style={styles.buttonText}>Accepter</Text>
+                    </Pressable>
+                </ScrollView>
+            </LinearGradient>
         </View>
     );
 }
