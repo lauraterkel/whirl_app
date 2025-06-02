@@ -16,6 +16,7 @@ export default function ImportantInfoScreen() {
     };
 
     return (
+        <View style={styles.container}>
         <LinearGradient
             colors={['#F8F5F2', '#D9EBF7', '#EAC5A1']}
             locations={[0, 0.7, 1]}
@@ -54,6 +55,7 @@ export default function ImportantInfoScreen() {
                 </Pressable>
             </ScrollView>
         </LinearGradient>
+        </View>
     );
 }
 
