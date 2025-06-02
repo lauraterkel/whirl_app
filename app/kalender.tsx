@@ -69,7 +69,7 @@ export default function CalendarScreen() {
     setTempSelectedExercise(itemValue);
     setSelectedExercise(itemValue);
 
-    // Update the event immediately
+    // Update event 
     if (selectedEvent) {
       const updatedEvents = calendarEvents.map((event) =>
         event.id === selectedEvent.id
