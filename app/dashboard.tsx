@@ -273,7 +273,7 @@ export default function Index() {
         <View style={styles.chatContainer}>
           <View style={styles.boxesHeader}>
             <Semi style={styles.boxesTitle}>Start en samtale</Semi>
-            <Pressable onPress={() => showInfo('Chat', 'I chatten kan du skrive med en AI-assistent, der kan hjælpe dig med at håndtere stress og angst. Du kan stille spørgsmål, få vejledning og support når du har brug for det.')}>
+            <Pressable onPress={() => showInfo('Chat', 'I chatten kan du skrive med en AI-assistent, der kan hjælpe dig med at håndtere stress og angst. Du kan stille spørgsmål, få vejledning og support, når du har brug for det.')}>
               <Feather name="info" size={24} color="#051B2F" />
             </Pressable>
           </View>
@@ -307,7 +307,7 @@ export default function Index() {
               <Image source={require('../assets/icons/klimaangst.png')} style={styles.cardImage} />
 
               <Text style={styles.cardDescription}>
-                Når klimaangsten rammer, kan individuel, internetbaseret terapi føre til forbedringer, indikerer forsøg.
+                Når klimaangsten rammer kan individuel internetbaseret terapi føre til forbedringer indikerer forsøg.
               </Text>
               <Pressable onPress={() => openOverlay('klimaangst')} style={styles.cardButton}>
                 <Text style={styles.cardButtonText}>Læs mere</Text>
@@ -383,7 +383,7 @@ export default function Index() {
               <Image source={require('../assets/icons/dempstress.png')} style={styles.cardImage} />
 
               <Text style={styles.cardDescription}>
-                Tid i naturen gavner vores mentale helbred – takket være en lille, mandelformet struktur dybt i hjernen.
+                Tid i naturen gavner vores mentale helbred - takket være en lille mandelformet struktur dybt i hjernen.
               </Text>
               <Pressable onPress={() => openOverlay('daemp')} style={styles.cardButton}>
                 <Text style={styles.cardButtonText}>Læs mere</Text>
@@ -420,7 +420,7 @@ export default function Index() {
               <Image source={require('../assets/icons/hvaderangst.png')} style={styles.cardImage} />
 
               <Text style={styles.cardDescription}>
-                Måske har du selv oplevet angst – eller kender nogen, der har.
+                Måske har du selv oplevet angst - eller kender nogen, der har?
                 Bliv klogere på emnet her.
               </Text>
               <Pressable onPress={() => openOverlay('angst')} style={styles.cardButton}>
@@ -464,7 +464,7 @@ export default function Index() {
 
           <View style={styles.contactCard}>
             <View style={styles.contactContent}>
-              <Text style={styles.boxesTitle2}>Angst og stress Foreningen</Text>
+              <Text style={styles.boxesTitle2}>Angst og StressForeningen</Text>
 
               <View style={styles.contactLeft}>
                 <Feather name="phone" size={24} color="#051B2F" />
@@ -513,7 +513,7 @@ export default function Index() {
 
           <View style={styles.contactCard}>
             <View style={styles.contactContent}>
-              <Text style={styles.boxesTitle2}>whirl</Text>
+              <Text style={styles.boxesTitle2}>Whirl</Text>
 
               <View style={styles.contactLeft}>
                 <Feather name="instagram" size={24} color="#051B2F" />
@@ -827,7 +827,7 @@ const styles = StyleSheet.create({
     height: 150,
     resizeMode: 'contain',
     alignSelf: 'center',
-    marginVertical: 10,
+    marginVertical: 20,
   },
   
   cardTitle: {

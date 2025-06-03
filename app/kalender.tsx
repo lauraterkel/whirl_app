@@ -124,7 +124,7 @@ export default function CalendarScreen() {
 
           <Link href={"/chat"} asChild>
             <Pressable style={styles.chatButton}>
-              <Med style={styles.planButtonText}>Planlæg med whirl</Med>
+              <Med style={styles.planButtonText}>Planlæg med Whirl</Med>
               <Image
                 source={require('../assets/icons/chat-icon.png')}
                 style={{ width: 30, height: 30 }}
@@ -142,7 +142,7 @@ export default function CalendarScreen() {
         <Modal visible={showModal} transparent animationType="slide">
           <View style={styles.modalOverlay}>
             <View style={styles.modalContainer}>
-              <Text style={styles.titleTextPop}>Planlæg en Øvelse</Text>
+              <Text style={styles.titleTextPop}>Planlæg en øvelse</Text>
 
               <Text style={styles.modalLabel}>Dato</Text>
               <View style={styles.longButton}>

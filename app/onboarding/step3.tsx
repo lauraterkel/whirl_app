@@ -68,7 +68,7 @@ export default function MethodsScreen() {
             />
             <View style={styles.infoBox}>
               <Reg style={styles.infoText}>
-                Synkronisér med din kalender, så hjælper whirl dig med at planlægge øvelser og huske dem til dine begivenheder.
+                Synkronisér med din kalender, så hjælper Whirl dig med at planlægge øvelser og huske dem til dine begivenheder.
               </Reg>
             </View>
           </View>

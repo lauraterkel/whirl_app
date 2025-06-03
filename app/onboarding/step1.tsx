@@ -81,7 +81,7 @@ export default function MethodsScreen() {
             />
             <View style={styles.infoBox}>
               <Reg style={styles.infoText}>
-                Hvis ingen af øvelserne føles helt rigtige endnu, så bare rolig – whirl støtter dig i at udforske, hvad der føles rigtigt for dig.
+                Hvis ingen af øvelserne føles helt rigtige endnu, så bare rolig - Whirl støtter dig i at udforske, hvad der føles rigtigt for dig.
               </Reg>
             </View>
           </View>

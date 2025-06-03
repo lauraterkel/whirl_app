@@ -14,7 +14,7 @@ import Reg from '../../components/font/Reg';
 
 const methods = [
   'Før en eksamen eller præsentation',
-  'Før sociale arrangementer',
+  'Før socialearrangementer',
   'Om aftenen før jeg går i seng',
   'Før skole/arbejde',
 ];
@@ -81,7 +81,7 @@ export default function MethodsScreen() {
             />
             <View style={styles.infoBox}>
               <Reg style={styles.infoText}>
-                Hvis ingen af tidspunkterne føles helt rigtige endnu, så bare rolig – whirl kan også støtte dig når behovet opstår.
+                Hvis ingen af tidspunkterne føles helt rigtige endnu, så bare rolig - Whirl kan også støtte dig når behovet opstår.
               </Reg>
             </View>
           </View>

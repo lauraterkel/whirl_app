@@ -133,7 +133,7 @@ export default function FavoritesScreen() {
         ListFooterComponent={
           <Link href={"/chat"} asChild>
             <Pressable style={styles.chatButton}>
-              <Med style={styles.planButtonText}>Planlæg med whirl</Med>
+              <Med style={styles.planButtonText}>Udforsk øvelser med whirl</Med>
               <Image
                 source={require('../assets/icons/chat-icon.png')}
                 style={{ width: 30, height: 30 }}

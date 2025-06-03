@@ -26,9 +26,9 @@ export default function ImportantInfoScreen() {
                     <Med style={styles.H1}>Vigtige oplysninger</Med>
 
                     <View style={styles.card}>
-                        <Semi style={styles.cardTitle}>whirl er ikke en erstatning for professionel hjælp</Semi>
+                        <Semi style={styles.cardTitle}>Whirl er ikke en erstatning for professionel hjælp</Semi>
                         <Reg style={styles.p}>
-                            whirl er et AI-baseret støtteredskab og ikke en erstatning for psykologisk behandling
+                            Whirl er et AI-baseret støtteredskab og ikke en erstatning for psykologisk behandling
                             eller diagnosticering. Det er skabt til at støtte dig i angstfyldte øjeblikke.
                         </Reg>
                     </View>
@@ -36,15 +36,15 @@ export default function ImportantInfoScreen() {
                     <View style={styles.card}>
                         <Semi style={styles.cardTitle}>Søg altid professionel rådgivning ved behov</Semi>
                         <Reg style={styles.p}>
-                            whirls svar kan indeholde fejl. Vi anbefaler, at du kontakter en professionel for
-                            rådgivning. Du finder kontaktinfo til hjælp og støtte på her i appen.
+                            Whirls svar kan indeholde fejl. Vi anbefaler, at du kontakter en professionel for
+                            rådgivning. Du finder kontaktinformation til hjælp og støtte i appen.
                         </Reg>
                     </View>
 
                     <View style={styles.card}>
                         <Semi style={styles.cardTitle}>Kun for brugere over 18 år</Semi>
                         <Reg style={styles.p}>
-                            whirl er for personer over 18 år. Ved at bruge Whirl accepterer du vores vilkår og
+                            Whirl er for personer over 18 år. Ved at bruge Whirl accepterer du vores vilkår og
                             forstår, at dine data behandles fortroligt og i overensstemmelse med GDPR.
                         </Reg>
                     </View>
